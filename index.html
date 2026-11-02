@@ -435,120 +435,40 @@
   <!-- Application Logic (Vanilla JS) -->
   <script>
     /* Demo Products: Replace affiliateLink with your Amazon Associate tag */
-    const products = [https://docs.google.com/spreadsheets/d/e/2PACX-1vTb7KhPGL8SQJX6QIBFN46S3EYTNwdhfkhsNqgDyP5IoNZrjJcqR1hq0XJJJOmq1-323fAsZ6q4DQbY/pub?output=csv
-      {
-        id: 1,
-        title: "Aura Glow Smart Sunset Projection Lamp",
-        category: "Home & Decor",
-        tag: "Viral On Pinterest",
-        badgeColor: "bg-rose-500",
-        price: 24.99,
-        originalPrice: 42.00,
-        rating: 4.9,
-        reviews: 3240,
-        description: "Transform any bedroom into an aesthetic golden hour retreat. 16 color modes controlled via smartphone app with 360-degree rotation.",
-        image: "https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=700&q=80",
-        affiliateLink: "https://amazon.com?tag=youraffiliatetag-20"
-      },
-      {
-        id: 2,
-        title: "3-in-1 Foldable Magnetic Wireless Charging Station",
-        category: "Smart Tech",
-        tag: "Desk Essential",
-        badgeColor: "bg-indigo-600",
-        price: 38.50,
-        originalPrice: 59.99,
-        rating: 4.8,
-        reviews: 2190,
-        description: "Fast-charges iPhone, Apple Watch, and AirPods at once. Minimalist folding origami design perfect for clutter-free travel and nightstands.",
-        image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=700&q=80",
-        affiliateLink: "https://amazon.com?tag=youraffiliatetag-20"
-      },
-      {
-        id: 3,
-        title: "Multifunctional 14-in-1 Pro Vegetable & Onion Chopper",
-        category: "Kitchen Hacks",
-        tag: "5M+ TikTok Views",
-        badgeColor: "bg-emerald-600",
-        price: 29.99,
-        originalPrice: 45.00,
-        rating: 4.7,
-        reviews: 8400,
-        description: "Cuts meal prep time from 40 mins to 5 mins. Heavy-duty stainless steel blades with built-in catch tray and finger-guard cleaner.",
-        image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=700&q=80",
-        affiliateLink: "https://amazon.com?tag=youraffiliatetag-20"
-      },
-      {
-        id: 4,
-        title: "H2O Flame Ultrasonic Mist Diffuser & Humidifier",
-        category: "Home & Decor",
-        tag: "Cozy Aesthetic",
-        badgeColor: "bg-amber-600",
-        price: 32.90,
-        originalPrice: 49.00,
-        rating: 4.9,
-        reviews: 1420,
-        description: "Simulates a warm fireplace flame through ultrasonic mist and LED lights. Auto shut-off protection and whisper-quiet aroma therapy.",
-        image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=700&q=80",
-        affiliateLink: "https://amazon.com?tag=youraffiliatetag-20"
-      },
-      {
-        id: 5,
-        title: "Transparent Mechanical Keyboard with RGB Underglow",
-        category: "Smart Tech",
-        tag: "Pinterest Setup",
-        badgeColor: "bg-purple-600",
-        price: 64.99,
-        originalPrice: 89.99,
-        rating: 4.8,
-        reviews: 980,
-        description: "Ultra-clean crystal clear keycaps with creamy pre-lubed switches. Bluetooth 5.0, 2.4G wireless, and wired multi-device hot-swap.",
-        image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=700&q=80",
-        affiliateLink: "https://amazon.com?tag=youraffiliatetag-20"
-      },
-      {
-        id: 6,
-        title: "Double-Walled Insulated Glass Tumbler with Bamboo Lid",
-        category: "Lifestyle",
-        tag: "Iced Coffee Must",
-        badgeColor: "bg-rose-500",
-        price: 18.00,
-        originalPrice: 26.00,
-        rating: 4.9,
-        reviews: 4120,
-        description: "Keeps iced lattes freezing cold for 6 hours without outer condensation sweat rings. Comes with reusable glass straw and cleaning brush.",
-        image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80",
-        affiliateLink: "https://amazon.com?tag=youraffiliatetag-20"
-      },
-      {
-        id: 7,
-        title: "Electric Milk Frother & Handheld Matcha Whisk",
-        category: "Kitchen Hacks",
-        tag: "Morning Routine",
-        badgeColor: "bg-teal-600",
-        price: 14.99,
-        originalPrice: 22.00,
-        rating: 4.7,
-        reviews: 12500,
-        description: "Creates thick, velvety coffeehouse microfoam in under 15 seconds. High speed titanium motor with sleek tabletop stand included.",
-        image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=700&q=80",
-        affiliateLink: "https://amazon.com?tag=youraffiliatetag-20"
-      },
-      {
-        id: 8,
-        title: "Retro Vinyl Record Bluetooth Speaker with Visual Spin",
-        category: "Lifestyle",
-        tag: "Gift Idea",
-        badgeColor: "bg-pink-600",
-        price: 45.00,
-        originalPrice: 65.00,
-        rating: 4.8,
-        reviews: 860,
-        description: "Plays punchy hi-fi audio while miniature vinyl record physically spins on top. Includes built-in white noise ocean and rainfall sound modes.",
-        image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=700&q=80",
-        affiliateLink: "https://amazon.com?tag=youraffiliatetag-20"
-      }
-    ];
+    const products = [let products = [];
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTb7KhPGL8SQJX6QIBFN46S3EYTNwdhfkhsNqgDyP5IoNZrjJcqR1hq0XJJJOmq1-323fAsZ6q4DQbY/pub?output=csv";
+
+async function loadProductsFromSheet() {
+  try {
+    const response = await fetch(SHEET_CSV_URL);
+    const data = await response.text();
+    
+    const rows = data.split('\n').filter(row => row.trim() !== '');
+    if (rows.length <= 1) return;
+
+    const headers = rows[0].split(',').map(h => h.trim());
+
+    products = rows.slice(1).map(row => {
+      const values = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(v => v.replace(/^"|"$/g, '').trim());
+      let obj = {};
+      headers.forEach((header, i) => {
+        obj[header] = values[i] || '';
+      });
+      
+      obj.id = Number(obj.id) || Math.random();
+      obj.price = Number(obj.price) || 0;
+      obj.originalPrice = Number(obj.originalPrice) || (obj.price ? Math.round(obj.price * 1.3) : 0);
+      obj.rating = Number(obj.rating) || 4.7;
+      return obj;
+    });
+
+    renderProducts(products);
+  } catch (error) {
+    console.error("Sheet load error:", error);
+  }
+}
+
+loadProductsFromSheet();];
 
     const categories = ["All", "Smart Tech", "Home & Decor", "Kitchen Hacks", "Lifestyle"];
     let currentCategory = "All";
