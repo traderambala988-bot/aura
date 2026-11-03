@@ -39,7 +39,6 @@
   </script>
 
   <style>
-    /* Custom scrollbar & badge styling */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -103,7 +102,7 @@
       <div class="flex items-center gap-2 sm:gap-3">
         <!-- Saved Wishlist Trigger -->
         <button 
-          id="savedDrawerBtn"
+          id="savedDrawerBtn" 
           onclick="toggleSavedDrawer()" 
           class="relative p-2.5 rounded-full hover:bg-slate-100 text-slate-700 transition-colors flex items-center gap-1.5 text-sm font-semibold"
           title="Saved Items"
@@ -160,9 +159,7 @@
       </div>
 
       <!-- Live Category Filter Buttons -->
-      <div class="flex items-center justify-center gap-2 overflow-x-auto no-scrollbar py-2 px-2" id="categoryContainer">
-        <!-- Injected via JavaScript -->
-      </div>
+      <div class="flex items-center justify-center gap-2 overflow-x-auto no-scrollbar py-2 px-2" id="categoryContainer"></div>
 
     </div>
   </section>
@@ -196,26 +193,24 @@
       </div>
     </div>
 
-    <!-- Empty State (if no match) -->
+    <!-- Empty State -->
     <div id="noResultsState" class="hidden text-center py-16">
       <div class="w-16 h-16 mx-auto mb-4 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 text-2xl">
         <i class="fa-solid fa-magnifying-glass"></i>
       </div>
       <h3 class="text-lg font-bold text-slate-800 mb-1">No viral finds matched your search</h3>
-      <p class="text-sm text-slate-500 mb-4">Try searching for generic terms like "lamp", "charger", or "chopper".</p>
+      <p class="text-sm text-slate-500 mb-4">Try searching for generic terms like "lamp", "charger", or "trash".</p>
       <button onclick="resetFilters()" class="px-5 py-2 text-xs font-bold bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors">
         Clear All Filters
       </button>
     </div>
 
     <!-- Product Grid -->
-    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      <!-- Product Cards dynamically loaded here -->
-    </div>
+    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
 
   </main>
 
-  <!-- Newsletter / Pinterest Lead Magnet -->
+  <!-- Newsletter Section -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-14">
     <div class="bg-gradient-to-r from-slate-900 via-rose-950 to-slate-900 text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-xl">
       <div class="relative z-10 max-w-2xl">
@@ -248,7 +243,6 @@
   <div id="quickViewModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
       
-      <!-- Close Button -->
       <button 
         onclick="closeQuickView()" 
         class="absolute top-4 right-4 z-10 w-9 h-9 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full flex items-center justify-center text-sm transition-colors"
@@ -257,7 +251,6 @@
       </button>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 sm:p-8">
-        <!-- Image Area -->
         <div class="relative rounded-2xl overflow-hidden bg-slate-100 flex items-center justify-center min-h-[260px]">
           <img id="modalImg" src="" alt="Product" class="w-full h-full object-cover">
           <span id="modalBadge" class="absolute top-3 left-3 bg-rose-600 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
@@ -265,7 +258,6 @@
           </span>
         </div>
 
-        <!-- Details Area -->
         <div class="flex flex-col justify-between">
           <div>
             <div class="flex items-center gap-1.5 text-amber-500 text-xs font-bold mb-2">
@@ -281,31 +273,25 @@
             <div class="flex items-baseline gap-2 mb-4">
               <span id="modalPrice" class="text-2xl font-black text-rose-600">$29.99</span>
               <span id="modalOriginalPrice" class="text-sm text-slate-400 line-through">$49.99</span>
-              <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-md">Save 40%</span>
+              <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-md">Save Deal</span>
             </div>
 
             <p id="modalDescription" class="text-xs text-slate-600 leading-relaxed mb-4">
               Detailed description showing why this item went viral on Pinterest feeds.
             </p>
 
-            <!-- Key Highlights / Pros -->
             <div class="space-y-1.5 mb-6 text-xs text-slate-700">
               <div class="flex items-center gap-2">
                 <i class="fa-solid fa-circle-check text-emerald-500"></i>
-                <span>Fast 1-2 day delivery via Amazon Prime</span>
+                <span>Fast delivery via Amazon Prime</span>
               </div>
               <div class="flex items-center gap-2">
                 <i class="fa-solid fa-circle-check text-emerald-500"></i>
-                <span>Over 15,000 saves on Pinterest boards</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <i class="fa-solid fa-circle-check text-emerald-500"></i>
-                <span>30-Day Hassle-free Money Back Guarantee</span>
+                <span>Verified trending on Pinterest boards</span>
               </div>
             </div>
           </div>
 
-          <!-- Checkout CTA -->
           <div>
             <a 
               id="modalAffiliateLink" 
@@ -326,7 +312,7 @@
     </div>
   </div>
 
-  <!-- Saved Items Drawer (Off-Canvas) -->
+  <!-- Saved Items Drawer -->
   <div id="savedDrawer" class="fixed inset-0 z-50 hidden bg-slate-950/40 backdrop-blur-xs flex justify-end">
     <div class="w-full max-w-md bg-white h-full shadow-2xl flex flex-col p-6 animate-in slide-in-from-right duration-200">
       
@@ -340,10 +326,7 @@
         </button>
       </div>
 
-      <!-- Saved list container -->
-      <div id="savedListContainer" class="flex-1 overflow-y-auto py-4 space-y-3">
-        <!-- Rendered via JS -->
-      </div>
+      <div id="savedListContainer" class="flex-1 overflow-y-auto py-4 space-y-3"></div>
 
       <div class="pt-4 border-t border-slate-100 text-center">
         <button 
@@ -357,13 +340,13 @@
     </div>
   </div>
 
-  <!-- Toast Notification Message Box -->
+  <!-- Toast Notification -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-slate-900 text-white text-xs font-semibold py-3 px-5 rounded-2xl shadow-xl flex items-center gap-3 transition-transform transform">
     <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
     <span id="toastMessage">Product added to your saved list!</span>
   </div>
 
-  <!-- Floating Back to Top Button -->
+  <!-- Back to Top Button -->
   <button 
     id="backToTopBtn" 
     onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
@@ -373,117 +356,79 @@
     <i class="fa-solid fa-chevron-up text-sm"></i>
   </button>
 
-  <!-- Clean Footer -->
+  <!-- Footer -->
   <footer class="bg-white border-t border-slate-200/80 pt-12 pb-10 text-slate-600 text-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
-        <!-- Brand Info -->
-        <div class="md:col-span-2">
-          <div class="flex items-center gap-2 mb-3">
-            <div class="w-8 h-8 rounded-xl bg-rose-500 flex items-center justify-center text-white text-sm">
-              <i class="fa-brands fa-pinterest-p"></i>
-            </div>
-            <span class="text-base font-extrabold text-slate-900">AuraPicks</span>
-          </div>
-          <p class="text-slate-500 max-w-sm mb-4 leading-relaxed">
-            Your daily hub for viral home gear, functional desktop accessories, and aesthetic hacks trending across Pinterest and TikTok feeds.
-          </p>
-          <div class="flex items-center gap-3 text-base text-slate-400">
-            <a href="https://pinterest.com" target="_blank" rel="noopener" class="hover:text-rose-600 transition-colors"><i class="fa-brands fa-pinterest"></i></a>
-            <a href="https://instagram.com" target="_blank" rel="noopener" class="hover:text-pink-600 transition-colors"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener" class="hover:text-slate-900 transition-colors"><i class="fa-brands fa-tiktok"></i></a>
-          </div>
-        </div>
-
-        <!-- Quick Links -->
-        <div>
-          <h4 class="font-bold text-slate-900 mb-3 uppercase tracking-wider text-[11px]">Curated Niches</h4>
-          <ul class="space-y-2">
-            <li><a href="javascript:void(0)" onclick="filterByCategory('Smart Tech')" class="hover:text-rose-600">Smart Gadgets</a></li>
-            <li><a href="javascript:void(0)" onclick="filterByCategory('Home & Decor')" class="hover:text-rose-600">Cozy Room Decor</a></li>
-            <li><a href="javascript:void(0)" onclick="filterByCategory('Kitchen Hacks')" class="hover:text-rose-600">Kitchen Tools</a></li>
-            <li><a href="javascript:void(0)" onclick="filterByCategory('Lifestyle')" class="hover:text-rose-600">Everyday Gear</a></li>
-          </ul>
-        </div>
-
-        <!-- Compliance & Legal -->
-        <div>
-          <h4 class="font-bold text-slate-900 mb-3 uppercase tracking-wider text-[11px]">Transparency</h4>
-          <ul class="space-y-2">
-            <li><a href="#affiliate-terms" class="hover:text-rose-600">Affiliate Disclosure</a></li>
-            <li><a href="#privacy" class="hover:text-rose-600">Privacy Policy</a></li>
-            <li><a href="#terms" class="hover:text-rose-600">Terms of Service</a></li>
-            <li><a href="#contact" class="hover:text-rose-600">Contact / Submit Pin</a></li>
-          </ul>
-        </div>
+      <div class="pt-6 text-slate-400 text-[11px] leading-relaxed flex flex-col md:flex-row items-center justify-between gap-4">
+        <p>Participant in the Amazon Services LLC Associates Program. All trademarks belong to respective owners.</p>
+        <p>&copy; <span id="currentYear"></span> AuraPicks. All rights reserved.</p>
       </div>
-
-      <!-- Legal Disclosure Paragraph -->
-      <div class="pt-6 border-t border-slate-100 text-slate-400 text-[11px] leading-relaxed flex flex-col md:flex-row items-center justify-between gap-4">
-        <p>
-          Participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by linking to Amazon.com.
-        </p>
-        <p class="whitespace-nowrap">
-          &copy; <span id="currentYear"></span> AuraPicks. All rights reserved.
-        </p>
-      </div>
-
     </div>
   </footer>
 
-  <!-- Application Logic (Vanilla JS) -->
+  <!-- Application Logic -->
   <script>
-    /* Demo Products: Replace affiliateLink with your Amazon Associate tag */
-    let products = [];
-const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTb7KhPGL8SQJX6QIBFN46S3EYTNwdhfkhsNqgDyP5IoNZrjJcqR1hq0XJJJOmq1-323fAsZ6q4DQbY/pub?output=csv";
-
-async function loadProductsFromSheet() {
-  try {
-    const response = await fetch(SHEET_CSV_URL);
-    const data = await response.text();
+    const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTb7KhPGL8SQJX6QIBFN46S3EYTNwdhfkhsNqgDyP5IoNZrjJcqR1hq0XJJJOmq1-323fAsZ6q4DQbY/pub?output=csv";
     
-    const rows = data.split('\n').filter(row => row.trim() !== '');
-    if (rows.length <= 1) return;
-
-    const headers = rows[0].split(',').map(h => h.trim());
-
-    products = rows.slice(1).map(row => {
-      const values = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(v => v.replace(/^"|"$/g, '').trim());
-      let obj = {};
-      headers.forEach((header, i) => {
-        obj[header] = values[i] || '';
-      });
-      
-      obj.id = Number(obj.id) || Math.random();
-      obj.price = Number(obj.price) || 0;
-      obj.originalPrice = Number(obj.originalPrice) || (obj.price ? Math.round(obj.price * 1.3) : 0);
-      obj.rating = Number(obj.rating) || 4.7;
-      return obj;
-    });
-
-    renderProducts(products);
-  } catch (error) {
-    console.error("Sheet load error:", error);
-  }
-}
-
-loadProductsFromSheet();];
-
-    const categories = ["All", "Smart Tech", "Home & Decor", "Kitchen Hacks", "Lifestyle"];
+    let products = [];
+    let categories = ["All"];
     let currentCategory = "All";
     let searchQuery = "";
     let currentSort = "popular";
     let savedItems = JSON.parse(localStorage.getItem("aurapicks_saved") || "[]");
 
-    // Initialize application on load
+    async function loadProductsFromSheet() {
+      try {
+        const response = await fetch(SHEET_CSV_URL);
+        const data = await response.text();
+        
+        const lines = data.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+        if (lines.length <= 1) return;
+
+        const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+
+        products = lines.slice(1).map((line, index) => {
+          const values = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(v => v.replace(/^"|"$/g, '').trim());
+          let item = {};
+          headers.forEach((h, i) => {
+            item[h] = values[i] || '';
+          });
+
+          const pPrice = parseFloat(item.price) || 19.99;
+          const cat = item.category ? item.category.trim() : "Viral";
+
+          return {
+            id: Number(item.id) || (index + 1),
+            title: item.title || "Viral Find",
+            category: cat,
+            badge: item.badge || "VIRAL FIND",
+            badgeColor: "bg-rose-500",
+            rating: parseFloat(item.rating) || 4.7,
+            reviews: item.reviews || "1.2k",
+            price: pPrice,
+            originalPrice: Math.round(pPrice * 1.3),
+            image: item.image || "https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=700&q=80",
+            affiliateLink: item.affiliatelink || "https://amazon.com",
+            description: item.description || item.title || "Trending aesthetic product."
+          };
+        });
+
+        // Unique dynamic categories extract karein
+        const uniqueCats = Array.from(new Set(products.map(p => p.category)));
+        categories = ["All", ...uniqueCats];
+
+        renderCategoryPills();
+        renderProducts();
+        updateSavedBadge();
+      } catch (err) {
+        console.error("Sheet error:", err);
+      }
+    }
+
     window.addEventListener("DOMContentLoaded", () => {
       document.getElementById("currentYear").textContent = new Date().getFullYear();
-      renderCategoryPills();
-      renderProducts();
-      updateSavedBadge();
+      loadProductsFromSheet();
 
-      // Scroll listener for back to top button
       window.addEventListener("scroll", () => {
         const topBtn = document.getElementById("backToTopBtn");
         if (window.scrollY > 400) {
@@ -494,15 +439,14 @@ loadProductsFromSheet();];
       });
     });
 
-    // Render Filter Badges
     function renderCategoryPills() {
       const container = document.getElementById("categoryContainer");
       container.innerHTML = categories.map(cat => {
-        const isActive = cat === currentCategory;
+        const isActive = cat.toLowerCase() === currentCategory.toLowerCase();
         return `
           <button 
-            onclick="filterByCategory('${cat}')"
-            class="px-4 py-2 rounded-full text-xs font-bold transition-all whitespace-nowrap ${
+            onclick="filterByCategory('${cat}')" 
+            class="px-4 py-2 rounded-full text-xs font-bold transition-all capitalize whitespace-nowrap ${
               isActive 
                 ? 'bg-rose-600 text-white shadow-md shadow-rose-600/20' 
                 : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80'
@@ -514,7 +458,6 @@ loadProductsFromSheet();];
       }).join("");
     }
 
-    // Filter by Category
     function filterByCategory(category) {
       currentCategory = category;
       document.getElementById("currentCategoryTitle").textContent = category === "All" ? "All Viral Finds" : `${category} Picks`;
@@ -522,28 +465,23 @@ loadProductsFromSheet();];
       renderProducts();
     }
 
-    // Search Handler
     function handleSearch(query) {
       searchQuery = query.toLowerCase().trim();
-      // Keep mobile and desktop inputs synced
       document.getElementById("desktopSearchInput").value = query;
       document.getElementById("mobileSearchInput").value = query;
       renderProducts();
     }
 
-    // Sort Handler
     function handleSort(criteria) {
       currentSort = criteria;
       renderProducts();
     }
 
-    // Filter & Sort core logic
     function getFilteredProducts() {
       return products
         .filter(item => {
-          const matchesCategory = (currentCategory === "All") || (item.category === currentCategory);
+          const matchesCategory = (currentCategory === "All") || (item.category.toLowerCase() === currentCategory.toLowerCase());
           const matchesSearch = item.title.toLowerCase().includes(searchQuery) || 
-                                item.description.toLowerCase().includes(searchQuery) ||
                                 item.category.toLowerCase().includes(searchQuery);
           return matchesCategory && matchesSearch;
         })
@@ -551,11 +489,10 @@ loadProductsFromSheet();];
           if (currentSort === "rating") return b.rating - a.rating;
           if (currentSort === "price-low") return a.price - b.price;
           if (currentSort === "price-high") return b.price - a.price;
-          return b.reviews - a.reviews; // Popular default
+          return b.id - a.id;
         });
     }
 
-    // Render Grid
     function renderProducts() {
       const grid = document.getElementById("productGrid");
       const noResults = document.getElementById("noResultsState");
@@ -578,36 +515,30 @@ loadProductsFromSheet();];
         return `
           <div class="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-soft hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between">
             
-            <!-- Product Media Card -->
             <div class="relative overflow-hidden bg-slate-100 pt-[100%] cursor-pointer" onclick="openQuickView(${item.id})">
               <img 
                 src="${item.image}" 
                 alt="${item.title}" 
-                loading="lazy"
+                loading="lazy" 
                 class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 onerror="this.src='https://placehold.co/600x600/f8fafc/94a3b8?text=Product+Image'"
               >
               
-              <!-- Tag Badge -->
-              <span class="absolute top-3 left-3 ${item.badgeColor} text-white text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
-                ${item.tag}
+              <span class="absolute top-3 left-3 bg-rose-600 text-white text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">
+                ${item.badge}
               </span>
 
-              <!-- Discount pill -->
-              <span class="absolute top-3 right-12 bg-white/95 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm backdrop-blur-xs">
+              <span class="absolute top-3 right-12 bg-white/95 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">
                 -${discountPercent}%
               </span>
 
-              <!-- Save Button -->
               <button 
-                onclick="event.stopPropagation(); toggleSaveItem(${item.id})"
+                onclick="event.stopPropagation(); toggleSaveItem(${item.id})" 
                 class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-slate-700 flex items-center justify-center shadow-md transition-all active:scale-90"
-                title="${isSaved ? 'Remove from Saved' : 'Save for Later'}"
               >
                 <i class="${isSaved ? 'fa-solid text-rose-500' : 'fa-regular text-slate-600'} fa-heart text-sm"></i>
               </button>
 
-              <!-- Quick View Floating Button on Hover -->
               <div class="absolute inset-x-0 bottom-3 px-4 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <span class="bg-white/95 backdrop-blur-md text-slate-900 text-xs font-bold py-1.5 px-4 rounded-full shadow-lg flex items-center gap-1.5">
                   <i class="fa-solid fa-eye text-slate-500 text-xs"></i> Quick Look
@@ -615,34 +546,29 @@ loadProductsFromSheet();];
               </div>
             </div>
 
-            <!-- Content Area -->
             <div class="p-5 flex-1 flex flex-col justify-between">
               <div>
-                <!-- Category & Star Rating -->
                 <div class="flex items-center justify-between text-xs mb-2">
                   <span class="text-slate-400 font-semibold uppercase text-[10px] tracking-wider">${item.category}</span>
                   <div class="flex items-center gap-1 text-amber-500 font-bold">
                     <i class="fa-solid fa-star text-[11px]"></i>
                     <span>${item.rating}</span>
-                    <span class="text-slate-400 text-[10px]">(${item.reviews > 1000 ? (item.reviews/1000).toFixed(1) + 'k' : item.reviews})</span>
+                    <span class="text-slate-400 text-[10px]">(${item.reviews})</span>
                   </div>
                 </div>
 
-                <!-- Product Name -->
                 <h3 
-                  onclick="openQuickView(${item.id})"
+                  onclick="openQuickView(${item.id})" 
                   class="font-bold text-slate-900 text-sm leading-snug hover:text-rose-600 transition-colors cursor-pointer line-clamp-2 mb-2"
                 >
                   ${item.title}
                 </h3>
 
-                <!-- Benefit line -->
                 <p class="text-xs text-slate-500 line-clamp-2 mb-4 leading-relaxed">
                   ${item.description}
                 </p>
               </div>
 
-              <!-- Price & CTA Button -->
               <div>
                 <div class="flex items-baseline justify-between mb-3">
                   <div class="flex items-baseline gap-1.5">
@@ -650,16 +576,15 @@ loadProductsFromSheet();];
                     <span class="text-xs text-slate-400 line-through">$${item.originalPrice.toFixed(2)}</span>
                   </div>
                   <span class="text-[10px] font-bold text-emerald-600 flex items-center gap-1">
-                    <i class="fa-solid fa-truck-fast"></i> Prime Ready
+                    <i class="fa-solid fa-truck-fast"></i> Prime
                   </span>
                 </div>
 
-                <!-- High Conversion CTA -->
                 <a 
                   href="${item.affiliateLink}" 
                   target="_blank" 
-                  rel="nofollow sponsored noopener"
-                  class="w-full py-2.5 px-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 active:scale-[0.98] text-slate-950 font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-sm shadow-amber-500/20 transition-all"
+                  rel="nofollow sponsored noopener" 
+                  class="w-full py-2.5 px-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 active:scale-[0.98] text-slate-950 font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-sm transition-all"
                 >
                   <i class="fa-brands fa-amazon text-sm"></i>
                   <span>Check Price on Amazon</span>
@@ -673,7 +598,6 @@ loadProductsFromSheet();];
       }).join("");
     }
 
-    // Reset filters
     function resetFilters() {
       currentCategory = "All";
       searchQuery = "";
@@ -683,7 +607,6 @@ loadProductsFromSheet();];
       renderProducts();
     }
 
-    // Quick View Modal
     function openQuickView(id) {
       const item = products.find(p => p.id === id);
       if (!item) return;
@@ -693,10 +616,10 @@ loadProductsFromSheet();];
       document.getElementById("modalPrice").textContent = `$${item.price.toFixed(2)}`;
       document.getElementById("modalOriginalPrice").textContent = `$${item.originalPrice.toFixed(2)}`;
       document.getElementById("modalRating").textContent = item.rating;
-      document.getElementById("modalReviews").textContent = `(${item.reviews.toLocaleString()} reviews)`;
+      document.getElementById("modalReviews").textContent = `(${item.reviews} reviews)`;
       document.getElementById("modalDescription").textContent = item.description;
       document.getElementById("modalAffiliateLink").href = item.affiliateLink;
-      document.getElementById("modalBadge").textContent = item.tag;
+      document.getElementById("modalBadge").textContent = item.badge;
 
       document.getElementById("quickViewModal").classList.remove("hidden");
       document.body.style.overflow = "hidden";
@@ -707,14 +630,10 @@ loadProductsFromSheet();];
       document.body.style.overflow = "auto";
     }
 
-    // Close modal when clicking outside box
     document.getElementById("quickViewModal").addEventListener("click", function(e) {
-      if (e.target === this) {
-        closeQuickView();
-      }
+      if (e.target === this) closeQuickView();
     });
 
-    // Wishlist / Save Items Feature
     function toggleSaveItem(id) {
       const index = savedItems.indexOf(id);
       if (index > -1) {
@@ -736,8 +655,7 @@ loadProductsFromSheet();];
 
     function toggleSavedDrawer() {
       const drawer = document.getElementById("savedDrawer");
-      const isHidden = drawer.classList.contains("hidden");
-      if (isHidden) {
+      if (drawer.classList.contains("hidden")) {
         renderSavedDrawer();
         drawer.classList.remove("hidden");
         document.body.style.overflow = "hidden";
@@ -794,18 +712,15 @@ loadProductsFromSheet();];
       showToast("Cleared all saved items", "info");
     }
 
-    // Custom Toast Notification
     function showToast(msg, type = "success") {
       const toast = document.getElementById("toast");
       const toastMsg = document.getElementById("toastMessage");
       const toastIcon = document.getElementById("toastIcon");
 
       toastMsg.textContent = msg;
-      if (type === "success") {
-        toastIcon.className = "fa-solid fa-circle-check text-emerald-400 text-sm";
-      } else {
-        toastIcon.className = "fa-solid fa-circle-info text-sky-400 text-sm";
-      }
+      toastIcon.className = type === "success" 
+        ? "fa-solid fa-circle-check text-emerald-400 text-sm" 
+        : "fa-solid fa-circle-info text-sky-400 text-sm";
 
       toast.classList.remove("hidden");
       setTimeout(() => {
@@ -813,7 +728,6 @@ loadProductsFromSheet();];
       }, 3000);
     }
 
-    // Share Page URL
     function sharePage() {
       if (navigator.share) {
         navigator.share({
@@ -821,7 +735,6 @@ loadProductsFromSheet();];
           url: window.location.href
         }).catch(() => {});
       } else {
-        // Fallback for iFrame restricted environments
         const dummy = document.createElement("input");
         document.body.appendChild(dummy);
         dummy.value = window.location.href;
@@ -832,7 +745,6 @@ loadProductsFromSheet();];
       }
     }
 
-    // Lead capture simulation
     function handleNewsletter(e) {
       e.preventDefault();
       showToast("Thank you! You'll receive this Friday's top 5 viral pins.", "success");
