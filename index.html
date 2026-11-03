@@ -752,5 +752,162 @@
     }
   </script>
 
-</body>
+</body> <!-- Admin Floating Button -->
+<button id="openAdminBtn" onclick="toggleAdminModal()" style="position: fixed; bottom: 20px; right: 20px; background: #e60023; color: #fff; border: none; border-radius: 50%; width: 45px; height: 45px; font-size: 20px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 9999;">⚙️</button>
+
+<!-- Admin Popup Modal -->
+<div id="adminModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000; align-items: center; justify-content: center;">
+  <div style="background: #ffffff; border-radius: 12px; padding: 25px; width: 90%; max-width: 480px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); font-family: sans-serif;">
+    <h3 style="margin-top: 0; color: #333; display: flex; justify-content: space-between;">
+      <span>Add New Product</span>
+      <span style="cursor: pointer; color: #888;" onclick="toggleAdminModal()">✕</span>
+    </h3>
+    
+    <div id="adminFields">
+      <input type="text" id="p_title" placeholder="Product Title" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;" required />
+      
+      <input type="text" id="p_cat" placeholder="Category (e.g. Kitchen Hacks)" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;" required />
+      
+      <input type="text" id="p_badge" placeholder="Badge / Discount (e.g. -20% ya VIRAL)" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;" />
+      
+      <input type="text" id="p_rating" placeholder="Rating (e.g. 4.7 (1.2k))" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;" />
+      
+      <input type="url" id="p_image" placeholder="Image Direct URL" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;" required />
+      
+      <input type="url" id="p_link" placeholder="Affiliate Destination URL" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;" required />
+      
+      <button id="saveBtn" onclick="saveProductToGitHub()" style="width: 100%; background: #e60023; color: white; padding: 12px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
+        Save to GitHub & Publish
+      </button>
+      <p id="statusMsg" style="font-size: 13px; text-align: center; margin-top: 10px;"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const GITHUB_USERNAME = "traderambala988-bot"; 
+  const GITHUB_REPO = "aura"; 
+  const FILE_PATH = "products.json"; 
+  const BRANCH = "main"; 
+  
+  const ADMIN_PASSKEY = "12345"; 
+
+  function toggleAdminModal() {
+    const modal = document.getElementById("adminModal");
+    if (modal.style.display === "flex") {
+      modal.style.display = "none";
+    } else {
+      const enterPass = prompt("Admin Password enter karein:");
+      if (enterPass === ADMIN_PASSKEY) {
+        modal.style.display = "flex";
+      } else if (enterPass !== null) {
+        alert("Wrong Password!");
+      }
+    }
+  }
+
+  async function saveProductToGitHub() {
+    let token = localStorage.getItem("gh_token");
+    if (!token) {
+      token = prompt("Enter your GitHub Personal Access Token (PAT):");
+      if (!token) return alert("Token zaroori hai!");
+      localStorage.setItem("gh_token", token);
+    }
+
+    const title = document.getElementById("p_title").value.trim();
+    const category = document.getElementById("p_cat").value.trim().toUpperCase();
+    const badge = document.getElementById("p_badge").value.trim() || "";
+    const rating = document.getElementById("p_rating").value.trim() || "5.0";
+    const image = document.getElementById("p_image").value.trim();
+    const link = document.getElementById("p_link").value.trim();
+    const statusMsg = document.getElementById("statusMsg");
+    const saveBtn = document.getElementById("saveBtn");
+
+    if (!title || !category || !image || !link) {
+      alert("Kripya sabhi zaroori fields bharein!");
+      return;
+    }
+
+    saveBtn.disabled = true;
+    statusMsg.style.color = "#333";
+    statusMsg.innerText = "GitHub se data read ho raha hai...";
+
+    const apiUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/${FILE_PATH}?ref=${BRANCH}`;
+
+    try {
+      const res = await fetch(apiUrl, {
+        headers: {
+          Authorization: `token ${token}`,
+          Accept: "application/vnd.github.v3+json"
+        }
+      });
+
+      let currentProducts = [];
+      let sha = "";
+
+      if (res.ok) {
+        const fileData = await res.json();
+        sha = fileData.sha;
+        const decodedContent = decodeURIComponent(escape(atob(fileData.content)));
+        currentProducts = JSON.parse(decodedContent);
+      }
+
+      const newProduct = {
+        id: Date.now(),
+        title: title,
+        category: category,
+        badge: badge,
+        rating: rating,
+        image: image,
+        link: link
+      };
+
+      currentProducts.unshift(newProduct);
+
+      statusMsg.innerText = "GitHub par commit bheja ja raha hai...";
+
+      const updatedJsonString = JSON.stringify(currentProducts, null, 2);
+      const encodedUpdatedContent = btoa(unescape(encodeURIComponent(updatedJsonString)));
+
+      const commitRes = await fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          Authorization: `token ${token}`,
+          "Content-Type": "application/json",
+          Accept: "application/vnd.github.v3+json"
+        },
+        body: JSON.stringify({
+          message: `Add product: ${title}`,
+          content: encodedUpdatedContent,
+          sha: sha,
+          branch: BRANCH
+        })
+      });
+
+      if (commitRes.ok) {
+        statusMsg.style.color = "green";
+        statusMsg.innerText = "✓ Product successfully save ho gaya! 1-2 min mein live dikhega.";
+        document.getElementById("p_title").value = "";
+        document.getElementById("p_cat").value = "";
+        document.getElementById("p_badge").value = "";
+        document.getElementById("p_rating").value = "";
+        document.getElementById("p_image").value = "";
+        document.getElementById("p_link").value = "";
+        setTimeout(() => { toggleAdminModal(); statusMsg.innerText = ""; }, 2000);
+      } else {
+        const err = await commitRes.json();
+        throw new Error(err.message || "Failed to commit");
+      }
+    } catch (error) {
+      statusMsg.style.color = "red";
+      statusMsg.innerText = "Error: " + error.message;
+      if (error.message.includes("Bad credentials")) {
+        localStorage.removeItem("gh_token");
+        alert("GitHub Token galat hai ya expire ho chuka hai. Dobara enter karein.");
+      }
+    } finally {
+      saveBtn.disabled = false;
+    }
+  }
+</script>
 </html>
